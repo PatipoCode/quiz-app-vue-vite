@@ -1,41 +1,17 @@
 <script setup lang="ts">
-import { ref } from "vue";
 import { useRouter } from "vue-router";
 import { useI18n } from "vue-i18n";
 import { useForm, useField } from "vee-validate";
 import { useQuizStore } from "../store/quiz";
+import { useValidation } from "../composables/useValidation";
 import ScreenLayout from "../components/ScreenLayout.vue";
-import Input from "../components/Input.vue";
-import Button from "../components/Button.vue";
+import BaseInput from "../components/BaseInput.vue";
+import BaseButton from "../components/BaseButton.vue";
 
 const router = useRouter();
 const { t } = useI18n();
 const quiz = useQuizStore();
-const submitting = ref(false);
-
-function validateEmail(value: string) {
-  if (!value) {
-    return t("email.error.required");
-  }
-
-  const trimmedValue = value.trim();
-
-  if (!trimmedValue) {
-    return t("email.error.required");
-  }
-
-  const EMAIL_RE = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-
-  if (!EMAIL_RE.test(trimmedValue)) {
-    return t("email.error.invalid");
-  }
-
-  if (trimmedValue.length > 50) {
-    return t("email.error.tooLong");
-  }
-
-  return true;
-}
+const { validateEmail } = useValidation();
 
 const { handleSubmit, meta } = useForm({
   validationSchema: {
@@ -49,16 +25,12 @@ const { handleSubmit, meta } = useForm({
 const { value: email, errorMessage } = useField<string>("email");
 
 const onSubmit = handleSubmit(async (values) => {
-  if (submitting.value) return;
-
-  submitting.value = true;
-
   try {
     const trimmedEmail = values.email.trim();
     quiz.setEmail(trimmedEmail);
     await router.replace({ name: "final" });
   } catch (error) {
-    submitting.value = false;
+    console.error("Failed to submit email:", error);
   }
 });
 </script>
@@ -71,11 +43,15 @@ const onSubmit = handleSubmit(async (values) => {
     </template>
 
     <form class="email-form" @submit.prevent="onSubmit" novalidate>
-      <Input v-model="email" :placeholder="t('email.placeholder')" autoFocus>
+      <BaseInput
+        v-model="email"
+        :placeholder="t('email.placeholder')"
+        autoFocus
+      >
         <template v-if="errorMessage" #error>
           {{ errorMessage }}
         </template>
-      </Input>
+      </BaseInput>
 
       <p class="email-form__legal">
         {{ t("email.legal.prefix") }}
@@ -84,12 +60,13 @@ const onSubmit = handleSubmit(async (values) => {
         <a href="#" class="email-form__link">{{ t("email.legal.terms") }}</a>
       </p>
 
-      <Button
-        action="next"
-        :disabled="!meta.valid || submitting"
-        @press="onSubmit"
+      <BaseButton
+        :disabled="!meta.valid"
+        @click="onSubmit"
         class="email-form__submit"
-      />
+      >
+        {{ t("button.next") }}
+      </BaseButton>
     </form>
   </ScreenLayout>
 </template>
@@ -99,25 +76,26 @@ const onSubmit = handleSubmit(async (values) => {
   display: flex;
   flex-direction: column;
   margin-top: 56px;
-}
 
-.email-form__legal {
-  display: block;
-  margin: 50px 27.5px auto;
-  text-align: center;
-  color: $secondary;
-  font-size: 14px;
-}
+  &__legal {
+    display: block;
+    margin: 50px 27.5px auto;
+    text-align: center;
+    color: $secondary;
+    font-size: 14px;
+  }
 
-.email-form__link {
-  color: $accent;
-  text-decoration: none;
-}
-.email-form__link:hover {
-  text-decoration: underline;
-}
+  &__link {
+    color: $accent;
+    text-decoration: none;
 
-.email-form__submit {
-  margin-top: 8px;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &__submit {
+    margin-top: 8px;
+  }
 }
 </style>
