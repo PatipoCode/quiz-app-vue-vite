@@ -21,23 +21,23 @@ export const TYPE_MAP: Record<ApiType, Type> = {
     multiple: 'multiple',
     bubble: 'bubble',
     'single-select': 'single',
-    'multiple-select': 'multiple',
+    'multiple-select': 'multiple', 
 } as const;
 
 export const GENDER_IMG_BY_LABEL: Record<string, string> = {
-    "gender.female": iconUrl("female-icon.png"),
-    "gender.male": iconUrl("male-icon.png"),
-    "gender.other": iconUrl("other-gender-icon.png"),
+    "gender.female": iconUrl("female-icon.svg"),
+    "gender.male": iconUrl("male-icon.svg"),
+    "gender.other": iconUrl("other-gender-icon.svg"),
 };
 
 export const TOPIC_ICON_BY_LABEL: Record<string, string> = {
-    "topic.werewolf": iconUrl("werewolf-icon.png"),
-    "topic.action": iconUrl("action-icon.png"),
-    "topic.royal_obsession": iconUrl("royal-icon.png"),
-    "topic.billionaire": iconUrl("billionaire-icon.png"),
-    "topic.romance": iconUrl("romance-icon.png"),
-    "topic.young_adult": iconUrl("young-adult-icon.png"),
-    "topic.bad_boy": iconUrl("bad-boy-icon.png"),
+    "topic.werewolf": iconUrl("werewolf-icon.svg"),
+    "topic.action": iconUrl("action-icon.svg"),
+    "topic.royal_obsession": iconUrl("royal-icon.svg"),
+    "topic.billionaire": iconUrl("billionaire-icon.svg"),
+    "topic.romance": iconUrl("romance-icon.svg"),
+    "topic.young_adult": iconUrl("young-adult-icon.svg"),
+    "topic.bad_boy": iconUrl("bad-boy-icon.svg"),
 };
 
 export const CSV_COLUMNS = ["order", "title", "type", "answer"] as const;
