@@ -1,13 +1,15 @@
 <script setup lang="ts">
+import { useRouter } from "vue-router";
 import { computed } from "vue";
 import { useI18n } from "vue-i18n";
 import { useQuizStore } from "../store/quiz";
 import ScreenLayout from "../components/ScreenLayout.vue";
-import Button from "../components/Button.vue";
+import BaseButton from "../components/BaseButton.vue";
 import type { Question, Option, QuizAnswerRow, CsvColumn } from "../types/quiz";
 
 const { t } = useI18n();
 const quiz = useQuizStore();
+const router = useRouter();
 
 const answerRows = computed<QuizAnswerRow[]>(() =>
   (quiz.questions as Question[]).map((question: Question, index: number) => {
@@ -61,6 +63,11 @@ function downloadAnswersAsCsv(): void {
 
   URL.revokeObjectURL(downloadUrl);
 }
+
+const onRetake = async () => {
+  quiz.retakeQuiz?.();
+  await router.replace({ name: "language" });
+};
 </script>
 
 <template>
@@ -95,7 +102,9 @@ function downloadAnswersAsCsv(): void {
       </span>
     </button>
 
-    <Button action="retake" class="final-screen__retake" />
+    <BaseButton @click="onRetake" class="final-screen__retake">
+      {{ t("button.retake") }}
+    </BaseButton>
   </ScreenLayout>
 </template>
 
