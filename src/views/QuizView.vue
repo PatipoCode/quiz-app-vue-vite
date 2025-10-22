@@ -10,14 +10,15 @@ import {
   isGenderQuestion,
   isTopicsQuestion,
   variantForQuestion,
-  genderImgFor,
-  topicImgFor,
 } from "../utils/quiz";
 import ScreenLayout from "../components/ScreenLayout.vue";
 import ProgressBar from "../components/ProgressBar.vue";
-import Button from "../components/Button.vue";
+import BaseButton from "../components/BaseButton.vue";
 import QuestionOption from "../components/QuestionOption.vue";
-import backIcon from "../assets/icons/back-icon.png";
+import BackButton from "../components/BackButton.vue";
+import GenderOption from "../components/GenderOption.vue";
+import TopicOption from "../components/TopicOption.vue";
+import DefaultOption from "../components/DefaultOption.vue";
 
 const router = useRouter();
 const quiz = useQuizStore();
@@ -42,10 +43,16 @@ const isAnswered = computed(
   () =>
     !!(currentQuestion.value && quiz.answers[currentQuestion.value.id]?.length)
 );
-
+const isLast = computed(() => quiz.current >= quiz.total - 1);
 const isGender = computed(() => isGenderQuestion(currentQuestion.value));
 const isTopics = computed(() => isTopicsQuestion(currentQuestion.value));
 const variant = computed(() => variantForQuestion(currentQuestion.value));
+
+const setOptionComponent = computed(() => {
+  if (isGender.value) return GenderOption;
+  if (typeForComp.value === "bubble" && isTopics.value) return TopicOption;
+  return DefaultOption;
+});
 
 const onSelect = (optId: string) => {
   if (!currentQuestion.value) return;
@@ -65,37 +72,37 @@ onMounted(async () => {
   if (!quiz.language) return router.replace("/");
   if (!quiz.questions.length) await quiz.loadQuestions();
 });
+
+const onNext = async () => {
+  if (isLast.value) {
+    await router.push({ name: "loader" });
+  } else {
+    quiz.next();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+};
 </script>
 
 <template>
   <ScreenLayout>
     <template #header>
-      <div class="quiz-header">
-        <button class="quiz-header__back" aria-label="Back" @click="onBack">
-          <img
-            :src="backIcon"
-            alt="Back button"
-            aria-hidden="true"
-            class="quiz-header__back-icon"
-          />
-        </button>
+      <BackButton @click="onBack" />
 
-        <ProgressBar
-          v-if="quiz.total > 0"
-          :current="overallCurrentIndex"
-          :total="overallTotal"
-          rounded
-        >
-          <template #top>
-            <span class="progress-bar__current">{{
-              overallCurrentIndex + 1
-            }}</span
-            >/<span class="progress-bar__total">
-              {{ overallTotal }}
-            </span>
-          </template>
-        </ProgressBar>
-      </div>
+      <ProgressBar
+        v-if="quiz.total > 0"
+        :current="overallCurrentIndex"
+        :total="overallTotal"
+        rounded
+      >
+        <template #top>
+          <span class="progress-bar__current">{{
+            overallCurrentIndex + 1
+          }}</span
+          >/<span class="progress-bar__total">
+            {{ overallTotal }}
+          </span>
+        </template>
+      </ProgressBar>
     </template>
 
     <template v-if="currentQuestion">
@@ -117,56 +124,15 @@ onMounted(async () => {
         @select="onSelect"
       >
         <template #option="{ option }">
-          <template v-if="isGender && genderImgFor(option.labelKey)">
-            <img
-              :src="genderImgFor(option.labelKey)"
-              :alt="t(option.labelKey)"
-              class="options__tile-emoji"
-              aria-hidden="true"
-            />
-            <span class="options__tile-label">{{ t(option.labelKey) }}</span>
-          </template>
-
-          <template v-else-if="typeForComp === 'bubble' && isTopics">
-            <img
-              v-if="topicImgFor(option.labelKey)"
-              :src="topicImgFor(option.labelKey)"
-              :alt="t(option.labelKey)"
-              class="options__bubble-icon"
-              aria-hidden="true"
-            />
-            <span class="options__bubble-label">{{ t(option.labelKey) }}</span>
-          </template>
-
-          <template v-else>
-            <span class="options__tile-label">{{ t(option.labelKey) }}</span>
-          </template>
+          <component :is="setOptionComponent" :option="option" />
         </template>
       </QuestionOption>
 
-      <Button action="next" :disabled="!isAnswered" class="next" />
+      <BaseButton :disabled="!isAnswered" @click="onNext">
+        {{ t("button.next") }}
+      </BaseButton>
     </template>
   </ScreenLayout>
 </template>
 
-<style scoped lang="scss">
-.quiz-header {
-  position: relative;
-  margin-top: -20px;
-}
-
-.quiz-header__back {
-  border: none;
-  background: transparent;
-}
-
-.quiz-header__back-icon {
-  position: absolute;
-  top: 20px;
-  cursor: pointer;
-}
-
-.title .accent {
-  color: $accent;
-}
-</style>
+<style scoped lang="scss"></style>
