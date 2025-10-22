@@ -11,7 +11,7 @@ const router = createRouter({
         { path: '/final', name: 'final', component: () => import('../views/FinalViev.vue') },
         { path: '/:pathMatch(.*)*', redirect: '/' },
     ],
-    scrollBehavior: () => ({ top: 0 }),
+    scrollBehavior: () => ({ top: 0, behavior: "smooth"  }),
 })
 
 router.beforeEach(async (to) => {
