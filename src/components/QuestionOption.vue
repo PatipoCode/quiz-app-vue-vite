@@ -125,6 +125,7 @@ const isTiles = computed(() => props.variant === "tiles");
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 10px;
   padding: 30px 18px;
   border-radius: 18px;
   background: $option-bg-color;
