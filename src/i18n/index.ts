@@ -53,6 +53,8 @@ const messages = {
             hint: 'Finding collections for you…',
         },
         email: {
+            form_label: 'Email submission form',
+            label: 'Email',
             title: 'Email',
             subtitle: 'Enter your email to get full access',
             placeholder: 'Your email',
@@ -72,14 +74,19 @@ const messages = {
             next: 'Next',
             retake: 'Retake quiz',
         },
-
         final: {
             title: 'Thank you',
             subtitle: 'for supporting us and passing quiz',
             download: 'Download my answers',
             retake: 'Retake quiz',
+            download_label: "Download answers as CSV file",
         },
+        progress_bar: {
+            "question": "Question {current} of {total}",
+            "completed": "{percent}% completed"
+        }
     },
+
     fr: {
         question: {
             language: 'Quelle est votre langue préférée ?',
@@ -132,6 +139,8 @@ const messages = {
             hint: 'Recherche de collections pour vous…',
         },
         email: {
+            form_label: 'Formulaire de saisie d`email',
+            label: 'Email',
             title: 'E-mail',
             subtitle: 'Saisissez votre e-mail pour obtenir l’accès complet',
             placeholder: 'Votre e-mail',
@@ -156,7 +165,12 @@ const messages = {
             subtitle: 'pour votre soutien et d’avoir passé le quiz',
             download: 'Télécharger mes réponses',
             retake: 'Reprendre le quiz',
+            download_label: "Télécharger les réponses au format CSV",
         },
+        progress_bar: {
+            "question": "Question {current} sur {total}",
+            "completed": "{percent}% terminé"
+        }
     },
 
     de: {
@@ -211,6 +225,8 @@ const messages = {
             hint: 'Wir suchen Sammlungen für dich…',
         },
         email: {
+            form_label: 'E-Mail-Eingabeformular',
+            label: 'Email',
             title: 'E-Mail',
             subtitle: 'Gib deine E-Mail ein, um vollen Zugriff zu erhalten',
             placeholder: 'Deine E-Mail',
@@ -235,7 +251,12 @@ const messages = {
             subtitle: 'für deine Unterstützung und das Absolvieren des Quiz',
             download: 'Meine Antworten herunterladen',
             retake: 'Quiz neu starten',
+            download_label: 'Antworten als CSV-Datei herunterladen',
         },
+        progress_bar: {
+            "question": "Frage {current} von {total}",
+            "completed": "{percent}% abgeschlossen"
+        }
     },
 
     es: {
@@ -290,6 +311,8 @@ const messages = {
             hint: 'Buscando colecciones para ti…',
         },
         email: {
+            form_label: 'Formulario de envío de correo electrónico',
+            label: 'Email',
             title: 'Correo electrónico',
             subtitle: 'Introduce tu correo para obtener acceso completo',
             placeholder: 'Tu correo',
@@ -314,7 +337,12 @@ const messages = {
             subtitle: 'por apoyarnos y completar el quiz',
             download: 'Descargar mis respuestas',
             retake: 'Repetir el quiz',
+            download_label: 'Descargar respuestas como archivo CSV',
         },
+        progress_bar: {
+            "question": "Pregunta {current} de {total}",
+            "completed": "{percent}% completado"
+        }
     },
 }
 
