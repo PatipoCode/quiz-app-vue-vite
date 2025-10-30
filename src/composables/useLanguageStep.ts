@@ -10,7 +10,7 @@ import type { Question, LocaleCode } from '../types/quiz';
 export function useLanguageStep() {
   const quiz = useQuizStore();
   const router = useRouter();
-  const { locale } = useI18n();
+  const { locale } = useI18n({ useScope: 'global' });
 
   const languageQuestion = ref<Question | null>(null);
 
