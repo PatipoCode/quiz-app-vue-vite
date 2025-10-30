@@ -8,7 +8,7 @@ const router = createRouter({
         { path: '/quiz', name: 'quiz', component: () => import('../views/QuizView.vue') },
         { path: '/loader', name: 'loader', component: () => import('../views/LoaderView.vue') },
         { path: '/email', name: 'email', component: () => import('../views/EmailView.vue') },
-        { path: '/final', name: 'final', component: () => import('../views/FinalViev.vue') },
+        { path: '/final', name: 'final', component: () => import('../views/FinalView.vue') },
         { path: '/:pathMatch(.*)*', redirect: '/' },
     ],
     scrollBehavior: () => ({ top: 0, behavior: "smooth"  }),
