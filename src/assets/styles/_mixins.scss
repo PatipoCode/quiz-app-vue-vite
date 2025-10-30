@@ -1,0 +1,8 @@
+@use "variables" as *;
+
+@mixin focus-visible {
+  &:focus-visible {
+    outline: $focus-outline;
+    outline-offset: $focus-offset;
+  }
+}
