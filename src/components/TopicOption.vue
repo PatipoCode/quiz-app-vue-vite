@@ -14,7 +14,7 @@ const { t } = useI18n();
   <img
     v-if="topicImgFor(option.labelKey)"
     :src="topicImgFor(option.labelKey)"
-    :alt="t(option.labelKey)"
+    alt=""
     class="options__bubble-icon"
     aria-hidden="true"
   />

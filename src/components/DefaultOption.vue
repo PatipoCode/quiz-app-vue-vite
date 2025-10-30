@@ -10,5 +10,7 @@ const { t } = useI18n();
 </script>
 
 <template>
-  <span class="options__tile-label">{{ t(option.labelKey) }}</span>
+  <span class="options__tile-label" aria-hidden="true">{{
+    t(option.labelKey)
+  }}</span>
 </template>

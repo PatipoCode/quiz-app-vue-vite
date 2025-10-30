@@ -10,6 +10,7 @@ const props = withDefaults(
     options: Option[];
     selectedIds?: string[];
     variant?: "default" | "tiles";
+    groupLabel?: string;
   }>(),
   { variant: "default" }
 );
@@ -28,48 +29,52 @@ const isTiles = computed(() => props.variant === "tiles");
       'options',
       variant === 'tiles' ? 'options--tiles' : 'options--list',
     ]"
-    role="group"
   >
     <button
-      v-for="o in options"
-      :key="o.id"
+      v-for="option in options"
+      :key="option.id"
       type="button"
       :class="[
         variant === 'tiles' ? 'options__tile' : 'options__btn',
-        isSelected(o.id)
+        isSelected(option.id)
           ? variant === 'tiles'
             ? 'options__tile--selected'
             : 'options__btn--selected'
           : '',
       ]"
-      :aria-pressed="isSelected(o.id)"
-      @click="emit('select', o.id)"
+      :aria-pressed="isSelected(option.id)"
+      @click="emit('select', option.id)"
     >
-      <slot name="option" :option="o" :selected="isSelected(o.id)">
-        {{ t(o.labelKey) }}
+      <slot name="option" :option="option" :selected="isSelected(option.id)">
+        {{ t(option.labelKey) }}
       </slot>
 
       <span
         v-if="isMulti && !isTiles"
         class="options__check"
-        :class="{ 'options__check--on': isSelected(o.id) }"
+        :class="{ 'options__check--on': isSelected(option.id) }"
         aria-hidden="true"
       />
     </button>
   </div>
 
-  <div v-else class="options options--bubbles" role="group">
+  <div
+    v-else
+    class="options options--bubbles"
+    role="group"
+    :aria-label="groupLabel"
+  >
     <button
-      v-for="o in options"
-      :key="o.id"
+      v-for="option in options"
+      :key="option.id"
       type="button"
       class="options__bubble"
-      :class="{ 'options__bubble--selected': isSelected(o.id) }"
-      @click="emit('select', o.id)"
-      :aria-pressed="isSelected(o.id)"
+      :class="{ 'options__bubble--selected': isSelected(option.id) }"
+      @click="emit('select', option.id)"
+      :aria-pressed="isSelected(option.id)"
     >
-      <slot name="option" :option="o" :selected="isSelected(o.id)">
-        <span class="options__bubble-label">{{ t(o.labelKey) }}</span>
+      <slot name="option" :option="option" :selected="isSelected(option.id)">
+        <span class="options__bubble-label">{{ t(option.labelKey) }}</span>
       </slot>
     </button>
   </div>
@@ -107,7 +112,7 @@ const isTiles = computed(() => props.variant === "tiles");
   color: $secondary;
   font-size: 16px;
   cursor: pointer;
-  transition: transform 0.08s ease, outline-color 0.2s ease;
+  transition: $transition;
   outline: 2px solid transparent;
 }
 
@@ -126,12 +131,12 @@ const isTiles = computed(() => props.variant === "tiles");
   flex-direction: column;
   align-items: center;
   gap: 10px;
-  padding: 30px 18px;
+  padding: 23px 12px;
   border-radius: 18px;
   background: $option-bg-color;
   color: $btn-txt-color;
   outline: 2px solid transparent;
-  transition: transform 0.08s ease, outline-color 0.2s ease;
+  transition: $transition;
   border: none;
 }
 
@@ -190,9 +195,9 @@ const isTiles = computed(() => props.variant === "tiles");
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 6px;
-  width: 88px;
-  height: 88px;
+  gap: 7px;
+  width: 102px;
+  height: 102px;
   padding: 14px 12px;
   border-radius: 999px;
   border: 0;
@@ -200,7 +205,7 @@ const isTiles = computed(() => props.variant === "tiles");
   color: $btn-txt-color;
   cursor: pointer;
   outline: 2px solid transparent;
-  transition: transform 0.08s ease, outline-color 0.2s ease;
+  transition: $transition;
 }
 
 .options__bubble:active {
@@ -212,14 +217,24 @@ const isTiles = computed(() => props.variant === "tiles");
   outline-color: $accent;
   background-color: $option-bg-color-hover;
 }
-.options__bubble-label {
+
+:deep(.options__bubble-label) {
   font-size: 14px;
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
 }
 
 .options--bubbles :slotted(.options__bubble-icon) {
   display: block;
   width: 25px;
   height: 25px;
+}
+
+.options__btn,
+.options__tile,
+.options__bubble {
+  @include focus-visible;
 }
 </style>

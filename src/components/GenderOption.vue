@@ -14,7 +14,7 @@ const { t } = useI18n();
   <img
     v-if="genderImgFor(option.labelKey)"
     :src="genderImgFor(option.labelKey)"
-    :alt="t(option.labelKey)"
+    alt=""
     class="options__tile-emoji"
     aria-hidden="true"
   />

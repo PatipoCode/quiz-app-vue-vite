@@ -7,6 +7,9 @@ const props = withDefaults(
     placeholder?: string;
     type?: "email" | "text" | "tel";
     autoFocus?: boolean;
+    label?: string;
+    disabled?: boolean;
+    required?: boolean;
   }>(),
   {
     placeholder: "",
@@ -32,13 +35,15 @@ const inputValue = computed({
         class="base-input__field"
         v-model="inputValue"
         :type="type"
-        :inputmode="type === 'email' ? 'email' : 'text'"
+        :inputmode="type === 'email' ? 'email' : type === 'tel' ? 'tel' : 'text'"
         :autocomplete="type"
         autocapitalize="off"
         spellcheck="false"
         :placeholder="placeholder"
         :aria-invalid="!!$slots.error"
         :aria-describedby="$slots.error ? 'base-input-error' : undefined"
+        :disabled="disabled"
+        :required="required"
       />
     </label>
 
@@ -66,11 +71,9 @@ const inputValue = computed({
     color: $btn-txt-color;
     font-size: 16px;
     outline: 2px solid transparent;
-    transition: outline-color 0.2s ease;
+    transition: $transition;
 
-    &:focus {
-      outline-color: $accent;
-    }
+    @include focus-visible;
 
     &[aria-invalid="true"] {
       outline-color: $accent;

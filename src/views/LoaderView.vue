@@ -49,6 +49,7 @@ onBeforeUnmount(() => {
         :height="size"
         :viewBox="`0 0 ${size} ${size}`"
         class="loader__ring"
+        aria-hidden="true"
       >
         <circle
           :cx="size / 2"
@@ -78,12 +79,15 @@ onBeforeUnmount(() => {
           text-anchor="middle"
           dominant-baseline="central"
           class="loader__percent"
+          aria-hidden="true"
         >
           {{ value }}%
         </text>
       </svg>
 
-      <p class="hint">{{ t("loader.hint") }}</p>
+      <p class="hint" role="status" aria-live="polite">
+        {{ t("loader.hint") }}
+      </p>
     </div>
   </ScreenLayout>
 </template>
