@@ -7,3 +7,9 @@ $option-bg-color: #36173D;
 $option-bg-color-hover: #e4229b33;
 $input-bg-color: #492752;
 $checkbox-bg-color: #6D4376;
+
+$transition: all 0.3s ease-in-out;
+$transition-opacity: opacity 0.3s ease-in-out;
+
+$focus-outline: 2px solid $accent;
+$focus-offset: 2px;
