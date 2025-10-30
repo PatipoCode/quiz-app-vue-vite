@@ -42,10 +42,17 @@ const onSubmit = handleSubmit(async (values) => {
       <p class="subtitle">{{ t("email.subtitle") }}</p>
     </template>
 
-    <form class="email-form" @submit.prevent="onSubmit" novalidate>
+    <form
+      class="email-form"
+      @submit.prevent="onSubmit"
+      aria-label="t('email.form_label')"
+      novalidate
+    >
       <BaseInput
         v-model="email"
         :placeholder="t('email.placeholder')"
+        type="email"
+        :label="t('email.label')"
         autoFocus
       >
         <template v-if="errorMessage" #error>
@@ -53,19 +60,31 @@ const onSubmit = handleSubmit(async (values) => {
         </template>
       </BaseInput>
 
-      <p class="email-form__legal">
+      <p class="email-form__legal" role="note">
         {{ t("email.legal.prefix") }}
-        <a href="#" class="email-form__link">{{ t("email.legal.privacy") }}</a>
+        <a
+          href="#"
+          class="email-form__link"
+          target="_blank"
+          rel="noopener noreferrer"
+          >{{ t("email.legal.privacy") }}</a
+        >
         {{ t("email.legal.and") }}
-        <a href="#" class="email-form__link">{{ t("email.legal.terms") }}</a>
+        <a
+          href="#"
+          class="email-form__link"
+          target="_blank"
+          rel="noopener noreferrer"
+          >{{ t("email.legal.terms") }}</a
+        >
       </p>
 
       <BaseButton
         :disabled="!meta.valid"
-        @click="onSubmit"
+        type="submit"
+        :title="t('button.next')"
         class="email-form__submit"
       >
-        {{ t("button.next") }}
       </BaseButton>
     </form>
   </ScreenLayout>
@@ -87,10 +106,10 @@ const onSubmit = handleSubmit(async (values) => {
 
   &__link {
     color: $accent;
-    text-decoration: none;
+    transition: $transition-opacity;
 
     &:hover {
-      text-decoration: underline;
+      opacity: 0.8;
     }
   }
 

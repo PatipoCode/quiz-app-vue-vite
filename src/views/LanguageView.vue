@@ -18,7 +18,7 @@ const {
   loadLanguageQuestion,
   selectLanguage,
 } = useLanguageStep();
-const { progressTotal, progressCurrent } = useQuizProgress(quiz, {
+const { progressTotal } = useQuizProgress(quiz, {
   stepsBeforeQuiz: PRE_QUIZ_STEPS,
   currentStepIndex: LANGUAGE_STEP_INDEX,
 });
@@ -29,17 +29,14 @@ onMounted(loadLanguageQuestion);
 <template>
   <ScreenLayout>
     <template #header>
-      <ProgressBar :current="0" :total="progressTotal" rounded>
-        <template #top>
-          <span class="progress-bar__current">{{ progressCurrent }}</span> /
-          <span class="progress-bar__total">{{ progressTotal }}</span>
-        </template>
-      </ProgressBar>
+      <ProgressBar :current="0" :total="progressTotal" rounded> </ProgressBar>
     </template>
 
     <template v-if="languageQuestion">
-      <h1 class="title">{{ t(languageQuestion.titleKey) }}</h1>
-      <p class="subtitle">
+      <h1 class="title" aria-live="polite">
+        {{ t(languageQuestion.titleKey) }}
+      </h1>
+      <p class="subtitle" aria-live="polite">
         {{ t(languageQuestion.subtitleKey || "subtitle.language") }}
       </p>
 

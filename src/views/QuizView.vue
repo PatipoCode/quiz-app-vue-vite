@@ -3,14 +3,15 @@ import { onMounted, computed } from "vue";
 import { useRouter } from "vue-router";
 import { useQuizStore } from "../store/quiz";
 import { useI18n } from "vue-i18n";
-import type { ApiType, Type, Option, Question } from "../types/quiz";
+import type { Question } from "../types/quiz";
 import {
   normalizeType,
-  getOptions,
   isGenderQuestion,
+  getOptions,
   isTopicsQuestion,
   variantForQuestion,
 } from "../utils/quiz";
+import { MULTI_SELECT_LIMIT } from "../utils/constants.ts";
 import ScreenLayout from "../components/ScreenLayout.vue";
 import ProgressBar from "../components/ProgressBar.vue";
 import BaseButton from "../components/BaseButton.vue";
@@ -26,19 +27,11 @@ const { t } = useI18n();
 const currentQuestion = computed<Question | null>(() => quiz.currentQuestion);
 const overallCurrentIndex = computed(() => quiz.current + 1);
 const overallTotal = computed(() => quiz.total + 1);
-
-const typeForComp = computed<Type>(() =>
-  normalizeType(currentQuestion.value?.type as ApiType)
-);
-
-const optionsForComp = computed<Option[]>(() =>
-  getOptions(currentQuestion.value)
-);
-
+const typeForComp = computed(() => normalizeType(currentQuestion.value?.type));
+const optionsForComp = computed(() => getOptions(currentQuestion.value));
 const selectedIds = computed(() =>
   currentQuestion.value ? quiz.answers[currentQuestion.value.id] ?? [] : []
 );
-
 const isAnswered = computed(
   () =>
     !!(currentQuestion.value && quiz.answers[currentQuestion.value.id]?.length)
@@ -59,7 +52,11 @@ const onSelect = (optId: string) => {
   if (typeForComp.value === "single") {
     quiz.setSingleAnswer(currentQuestion.value.id, optId);
   } else {
-    quiz.toggleMultipleAnswer(currentQuestion.value.id, optId, 3);
+    quiz.toggleMultipleAnswer(
+      currentQuestion.value.id,
+      optId,
+      MULTI_SELECT_LIMIT
+    );
   }
 };
 
@@ -87,32 +84,28 @@ const onNext = async () => {
   <ScreenLayout>
     <template #header>
       <BackButton @click="onBack" />
-
       <ProgressBar
         v-if="quiz.total > 0"
         :current="overallCurrentIndex"
         :total="overallTotal"
         rounded
       >
-        <template #top>
-          <span class="progress-bar__current">{{
-            overallCurrentIndex + 1
-          }}</span
-          >/<span class="progress-bar__total">
-            {{ overallTotal }}
-          </span>
-        </template>
       </ProgressBar>
     </template>
 
     <template v-if="currentQuestion">
-      <i18n-t :keypath="currentQuestion.titleKey" tag="h1" class="title">
+      <i18n-t
+        :keypath="currentQuestion.titleKey"
+        tag="h1"
+        class="title"
+        aria-live="polite"
+      >
         <template #hl>
           <span class="accent">{{ t("word.highlight") }}</span>
         </template>
       </i18n-t>
 
-      <p v-if="currentQuestion.subtitleKey" class="subtitle">
+      <p v-if="currentQuestion.subtitleKey" class="subtitle" aria-live="polite">
         {{ t(currentQuestion.subtitleKey) }}
       </p>
 
@@ -128,11 +121,18 @@ const onNext = async () => {
         </template>
       </QuestionOption>
 
-      <BaseButton :disabled="!isAnswered" @click="onNext">
-        {{ t("button.next") }}
+      <BaseButton
+        :disabled="!isAnswered"
+        :title="t('button.next')"
+        @click="onNext"
+      >
       </BaseButton>
     </template>
   </ScreenLayout>
 </template>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.title .accent {
+  color: $accent;
+}
+</style>
