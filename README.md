@@ -11,7 +11,7 @@ A multilingual quiz application built with Vue 3, TypeScript, and Pinia for stat
 - 📊 **CSV export** of quiz answers
 - 🔄 **Progress tracking** throughout the quiz
 - 🗣️ **Accessibility compliant** (WCAG 2.1 AA standards, Lighthouse, WAVE)
-- 🧪 **Comprehensive test coverage** with Vitest
+- 🧪 **Comprehensive test coverage** - unit test coverage using **Vitest** and **Vue Test Utils**
 
 ## Tech Stack
 
@@ -80,3 +80,17 @@ This application follows WCAG 2.1 AA guidelines:
 <img width="250" height="90" alt="Lighthouse test of loader screen" src="https://github.com/user-attachments/assets/bbb5a1c0-0671-49bd-9283-a844acd8fcd3" />
 <img width="250" height="90" alt="Lighthouse test of email screen" src="https://github.com/user-attachments/assets/c648a0ad-eb19-44c9-99e0-6f68b22eda5a" />
 <img width="250" height="90" alt="Lighthouse test of final screen" src="https://github.com/user-attachments/assets/f557c692-6227-418e-8fdd-9f3ac7c2ee61" />
+
+### Test Coverage
+The project maintains test coverage across:
+- UI Components (buttons, inputs, options)
+- Business logic (validation, progress tracking)
+- Data export functionality
+
+### Running Tests
+
+npm run test
+ or
+npm test
+
+🚀
