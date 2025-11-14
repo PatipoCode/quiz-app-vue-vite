@@ -30,12 +30,15 @@ const inputValue = computed({
 
 <template>
   <div class="base-input">
-    <label class="base-input__label">
+    <label for="input-email" class="base-input__label">
       <input
+        id="email"
         class="base-input__field"
         v-model="inputValue"
         :type="type"
-        :inputmode="type === 'email' ? 'email' : type === 'tel' ? 'tel' : 'text'"
+        :inputmode="
+          type === 'email' ? 'email' : type === 'tel' ? 'tel' : 'text'
+        "
         :autocomplete="type"
         autocapitalize="off"
         spellcheck="false"
