@@ -75,10 +75,8 @@ This application follows WCAG 2.1 AA guidelines:
 - ✅ **Focus indicators** - Clear visual focus states
 - ✅ **Form validation** - Clear error messages and instructions
   
-<img width="400" height="169" alt="Lighthouse test of language screen" src="https://github.com/user-attachments/assets/baa48320-0384-437b-8eae-cd936ea839fc" />
-<img width="397" height="169" alt="Lighthouse test of quiz screen" src="https://github.com/user-attachments/assets/d649c99a-dd30-4c59-91e9-c03e4a7b0f17" />
-<img width="404" height="175" alt="Lighthouse test of loader screen" src="https://github.com/user-attachments/assets/bbb5a1c0-0671-49bd-9283-a844acd8fcd3" />
-<img width="404" height="169" alt="Lighthouse test of email screen" src="https://github.com/user-attachments/assets/c648a0ad-eb19-44c9-99e0-6f68b22eda5a" />
-<img width="346" height="172" alt="Lighthouse test of final screen" src="https://github.com/user-attachments/assets/f557c692-6227-418e-8fdd-9f3ac7c2ee61" />
-
-*role="textbox", aria-multiline="true", aria-placeholder="Enter file contents here", aria-autocomplete="list"**aria-label="To enrich screen reader interactions, please activate Accessibility in Grammarly extension settings"*
+<img width="400" height="160" alt="Lighthouse test of language screen" src="https://github.com/user-attachments/assets/baa48320-0384-437b-8eae-cd936ea839fc" />
+<img width="400" height="160" alt="Lighthouse test of quiz screen" src="https://github.com/user-attachments/assets/d649c99a-dd30-4c59-91e9-c03e4a7b0f17" />
+<img width="400" height="160" alt="Lighthouse test of loader screen" src="https://github.com/user-attachments/assets/bbb5a1c0-0671-49bd-9283-a844acd8fcd3" />
+<img width="400" height="160" alt="Lighthouse test of email screen" src="https://github.com/user-attachments/assets/c648a0ad-eb19-44c9-99e0-6f68b22eda5a" />
+<img width="400" height="160" alt="Lighthouse test of final screen" src="https://github.com/user-attachments/assets/f557c692-6227-418e-8fdd-9f3ac7c2ee61" />
