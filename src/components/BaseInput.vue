@@ -30,7 +30,8 @@ const inputValue = computed({
 
 <template>
   <div class="base-input">
-    <label for="input-email" class="base-input__label">
+    <label for="email" class="base-input__label">
+      <span class="base-input__label-text">{{ label }}</span>
       <input
         id="email"
         class="base-input__field"
@@ -62,6 +63,10 @@ const inputValue = computed({
 
   &__label {
     display: block;
+
+    &-text {
+       @include visually-hidden;
+    }
   }
 
   &__field {

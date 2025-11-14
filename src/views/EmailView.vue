@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { computed } from "vue";
 import { useRouter } from "vue-router";
 import { useI18n } from "vue-i18n";
 import { useForm, useField } from "vee-validate";
@@ -33,6 +34,8 @@ const onSubmit = handleSubmit(async (values) => {
     console.error("Failed to submit email:", error);
   }
 });
+
+const formAriaLabel = computed(() => t('email.form_label'));
 </script>
 
 <template>
@@ -45,7 +48,7 @@ const onSubmit = handleSubmit(async (values) => {
     <form
       class="email-form"
       @submit.prevent="onSubmit"
-      aria-label="t('email.form_label')"
+      :aria-label="formAriaLabel"
       novalidate
     >
       <BaseInput
@@ -105,8 +108,9 @@ const onSubmit = handleSubmit(async (values) => {
   }
 
   &__link {
-    color: $accent;
+    color: $link-color;
     transition: $transition-opacity;
+    text-decoration: underline;
 
     &:hover {
       opacity: 0.8;

@@ -85,9 +85,9 @@ onBeforeUnmount(() => {
         </text>
       </svg>
 
-      <h2 class="hint" role="status" aria-live="polite">
+      <p class="hint" role="status" aria-live="polite">
         {{ t("loader.hint") }}
-      </h2>
+      </p>
     </div>
   </ScreenLayout>
 </template>
