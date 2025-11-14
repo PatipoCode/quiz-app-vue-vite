@@ -67,6 +67,7 @@ Users can download their quiz answers as a CSV file with:
 - User's answers
 
 ## Accessibility Features
+
 This application follows WCAG 2.1 AA guidelines:
 - ✅ **Semantic HTML** - Proper heading hierarchy and ARIA labels
 - ✅ **Keyboard navigation** - Keyboard accessibility
@@ -81,7 +82,8 @@ This application follows WCAG 2.1 AA guidelines:
 <img width="250" height="90" alt="Lighthouse test of email screen" src="https://github.com/user-attachments/assets/c648a0ad-eb19-44c9-99e0-6f68b22eda5a" />
 <img width="250" height="90" alt="Lighthouse test of final screen" src="https://github.com/user-attachments/assets/f557c692-6227-418e-8fdd-9f3ac7c2ee61" />
 
-### Test Coverage
+## Test Coverage
+
 The project maintains test coverage across:
 - UI Components (buttons, inputs, options)
 - Business logic (validation, progress tracking)
