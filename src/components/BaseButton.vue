@@ -36,7 +36,7 @@ const emit = defineEmits<{
   padding: 16px;
   border: 0;
   border-radius: 1000px;
-  background-color: $accent;
+  background-color: $btn-color;
   color: $btn-txt-color;
   text-align: center;
   font-size: 16px;
