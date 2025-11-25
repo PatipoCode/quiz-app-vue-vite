@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, computed } from "vue";
+import { onMounted, computed, ref } from "vue";
 import { useRouter } from "vue-router";
 import { useQuizStore } from "../store/quiz";
 import { useI18n } from "vue-i18n";
@@ -41,6 +41,8 @@ const isGender = computed(() => isGenderQuestion(currentQuestion.value));
 const isTopics = computed(() => isTopicsQuestion(currentQuestion.value));
 const variant = computed(() => variantForQuestion(currentQuestion.value));
 
+const isLoading = ref(false);
+
 const setOptionComponent = computed(() => {
   if (isGender.value) return GenderOption;
   if (typeForComp.value === "bubble" && isTopics.value) return TopicOption;
@@ -67,7 +69,11 @@ const onBack = () => {
 
 onMounted(async () => {
   if (!quiz.language) return router.replace("/");
-  if (!quiz.questions.length) await quiz.loadQuestions();
+  if (!quiz.questions.length) {
+    isLoading.value = true;
+    await quiz.loadQuestions();
+    isLoading.value = false;
+  }
 });
 
 const onNext = async () => {
@@ -83,7 +89,7 @@ const onNext = async () => {
 <template>
   <ScreenLayout>
     <template #header>
-      <BackButton @click="onBack" />
+      <BackButton v-if="!isLoading" @click="onBack" />
       <ProgressBar
         v-if="quiz.total > 0"
         :current="overallCurrentIndex"
@@ -93,7 +99,12 @@ const onNext = async () => {
       </ProgressBar>
     </template>
 
-    <template v-if="currentQuestion">
+    <div v-if="isLoading" class="quiz-loader">
+      <div class="quiz-loader__spinner"></div>
+      <p class="quiz-loader__text">{{ t("question.loading") }}</p>
+    </div>
+
+    <template v-else-if="currentQuestion">
       <i18n-t
         :keypath="currentQuestion.titleKey"
         tag="h1"
@@ -134,5 +145,35 @@ const onNext = async () => {
 <style scoped lang="scss">
 .title .accent {
   color: $accent;
+}
+
+.quiz-loader {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 80px 20px;
+  gap: 20px;
+}
+
+.quiz-loader__spinner {
+  width: 70px;
+  height: 70px;
+  border: 4px solid rgba($accent, 0.25);
+  border-top-color: $accent;
+  border-radius: 50%;
+  animation: spin 0.45s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.quiz-loader__text {
+  font-size: 16px;
+  font-weight: 500;
+  color: $primary;
 }
 </style>

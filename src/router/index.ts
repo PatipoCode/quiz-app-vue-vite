@@ -11,7 +11,7 @@ const router = createRouter({
         { path: '/final', name: 'final', component: () => import('../views/FinalView.vue') },
         { path: '/:pathMatch(.*)*', redirect: '/' },
     ],
-    scrollBehavior: () => ({ top: 0, behavior: "smooth"  }),
+    scrollBehavior: () => ({ top: 0, behavior: "smooth" }),
 })
 
 router.beforeEach(async (to) => {
@@ -22,10 +22,6 @@ router.beforeEach(async (to) => {
 
     if (to.name === 'final' && !quiz.email.trim()) {
         return { name: 'email' }
-    }
-
-    if (to.name === 'quiz') {
-        await quiz.loadQuestions()
     }
 
     return true
