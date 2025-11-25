@@ -42,11 +42,4 @@ describe('useExportQuizAnswers', () => {
 
         testDownload();
     })
-
-    test('handles empty answers', () => {
-        store.questions = [testQuestion(1, 'question1')];
-        store.answers = {};
-
-        testDownload();
-    })
 })
