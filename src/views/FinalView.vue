@@ -5,6 +5,7 @@ import ScreenLayout from "../components/ScreenLayout.vue";
 import { useExportQuizAnswers } from "../composables/useExportQuizAnswers";
 import BaseButton from "../components/BaseButton.vue";
 import DownloadIcon from "../assets/icons/download.svg";
+import { useQuizStore } from "../store/quiz";
 
 const { t } = useI18n();
 const router = useRouter();
@@ -13,8 +14,10 @@ const { downloadAnswersAsCsv } = useExportQuizAnswers();
 const handleDownload = () => {
   downloadAnswersAsCsv(t);
 };
+const quizStore = useQuizStore();
 
 const onRetake = async () => {
+  quizStore.retakeQuiz();
   await router.replace({ name: "language" });
 };
 </script>
