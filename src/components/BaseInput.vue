@@ -65,7 +65,7 @@ const inputValue = computed({
     display: block;
 
     &-text {
-       @include visually-hidden;
+      @include visually-hidden;
     }
   }
 
@@ -89,6 +89,14 @@ const inputValue = computed({
 
     &::placeholder {
       color: rgba($btn-txt-color, 0.5);
+    }
+
+    &:-webkit-autofill,
+    &:-webkit-autofill:hover,
+    &:-webkit-autofill:focus,
+    &:-webkit-autofill:active {
+      -webkit-box-shadow: 0 0 0 1000px $input-bg-color inset;
+      -webkit-text-fill-color: $btn-txt-color;
     }
   }
 
