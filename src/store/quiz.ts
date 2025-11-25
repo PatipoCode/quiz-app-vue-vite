@@ -90,11 +90,13 @@ export const useQuizStore = defineStore('quiz', {
             }
         },
         retakeQuiz() {
+            this.resetQuizData();
+
             localStorage.removeItem(STORAGE_KEYS.locale);
             localStorage.removeItem(STORAGE_KEYS.email);
+
             this.language = 'en';
             this.email = '';
-            this.resetQuizData();
         },
     },
 })
