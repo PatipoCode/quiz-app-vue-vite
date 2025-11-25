@@ -14,7 +14,7 @@ import BackIcon from "../assets/icons/back-icon.svg";
   border: none;
   background: transparent;
   cursor: pointer;
-  padding: 8px;
+  padding: 2px;
 
   @include focus-visible;
 
