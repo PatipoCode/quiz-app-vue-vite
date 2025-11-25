@@ -8,6 +8,7 @@ const messages = {
             age: 'What is your age?',
             book_dislike: 'What do you {hl} the most in a book?',
             favorite_topics: 'What are your favorite topics?',
+            loading: 'Loading questions..',
         },
         word: {
             highlight: 'hate',
@@ -94,6 +95,7 @@ const messages = {
             age: 'Quel âge avez-vous ?',
             book_dislike: 'Qu’est-ce que vous {hl} le plus dans un livre ?',
             favorite_topics: 'Quels sont vos sujets préférés ?',
+            loading: 'Chargement des questions...',
         },
         word: {
             highlight: 'détestez',
@@ -180,6 +182,7 @@ const messages = {
             age: 'Wie alt bist du?',
             book_dislike: 'Was {hl} du an einem Buch am meisten?',
             favorite_topics: 'Was sind deine Lieblingsthemen?',
+            loading: 'Fragen werden geladen...',
         },
         word: {
             highlight: 'hasst',
@@ -266,6 +269,7 @@ const messages = {
             age: '¿Cuál es tu edad?',
             book_dislike: '¿Qué {hl} más en un libro?',
             favorite_topics: '¿Cuáles son tus temas favoritos?',
+            loading: 'Cargando preguntas...',
         },
         word: {
             highlight: 'odias',
