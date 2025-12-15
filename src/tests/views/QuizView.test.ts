@@ -170,30 +170,36 @@ describe('QuizView', () => {
         })
 
         const wrapper = mount(QuizView)
-
         const questionOption = wrapper.findComponent({ name: 'QuestionOption' })
+
         expect(questionOption.exists()).toBe(true)
     })
 
-    test('onBack returns to language view from first quiz question', () => {
-        store.current = 0
+    test('onBack returns to language view from first quiz question', async () => {
+        setupStore({
+            current: 0,
+            questions: [mockQuestionSingleOption]
+        })
 
-        if (store.current === 0) {
-            router.replace('/')
-        }
+        const wrapper = mount(QuizView)
+        const backButton = wrapper.findComponent({ name: 'BackButton' })
+
+        await backButton.trigger('click')
 
         expect(router.replace).toHaveBeenCalledWith('/')
     })
 
-    test('onBack returns to previous quiz question when current > 0', () => {
-        store.current = 1
+    test('onBack returns to previous quiz question when current > 0', async () => {
+        setupStore({
+            current: 1,
+            questions: [mockQuestionGender, mockQuestionSingleOption]
+        })
+
+        const wrapper = mount(QuizView)
+        const backButton = wrapper.findComponent({ name: 'BackButton' })
         const backSpy = vi.spyOn(store, 'back')
 
-        if (store.current === 0) {
-            router.replace('/')
-        } else {
-            store.back()
-        }
+        await backButton.trigger('click')
 
         expect(backSpy).toHaveBeenCalled()
     })
