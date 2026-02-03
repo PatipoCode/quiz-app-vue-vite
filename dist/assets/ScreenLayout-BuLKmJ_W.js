@@ -1,1 +1,0 @@
-import{_ as t,l as s,j as a,m as r,p as c,E as o}from"./index-Cq6DSGY0.js";const n={},d={class:"screen"},_={key:0,class:"header"},l={class:"main"};function i(e,m){return a(),s("div",d,[e.$slots.header?(a(),s("header",_,[o(e.$slots,"header")])):r("",!0),c("main",l,[o(e.$slots,"default")])])}const f=t(n,[["render",i],["__scopeId","data-v-4a0da36c"]]);export{f as S};
