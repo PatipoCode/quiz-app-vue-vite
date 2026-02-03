@@ -35,13 +35,11 @@ import EmailView from '../../views/EmailView.vue'
 describe('EmailView', () => {
 
     let wrapper: VueWrapper
-    let store: ReturnType<typeof useQuizStore>
-    let router: any
 
     beforeEach(() => {
         setActivePinia(createPinia())
-        store = useQuizStore()
-        router = useRouter()
+        useQuizStore()
+        useRouter()
         vi.clearAllMocks()
 
         wrapper = mount(EmailView)

@@ -22,10 +22,9 @@ import type { VueWrapper } from '@vue/test-utils'
 
 describe('LoaderView', () => {
     let wrapper: VueWrapper
-    let router: any
 
     beforeEach(() => {
-        router = useRouter()
+        useRouter()
         vi.clearAllMocks()
         wrapper = mount(LoaderView)
     })

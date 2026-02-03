@@ -40,12 +40,11 @@ import FinalView from '../../views/FinalView.vue'
 describe('FinalView', () => {
     let wrapper: VueWrapper
     let store: ReturnType<typeof useQuizStore>
-    let router: any
 
     beforeEach(() => {
         setActivePinia(createPinia())
         store = useQuizStore()
-        router = useRouter()
+        useRouter()
         vi.clearAllMocks()
 
         wrapper = mount(FinalView)
