@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import { useQuizStore } from '../store/quiz'
 
 const router = createRouter({
-    history: createWebHistory(),
+    history: createWebHistory(import.meta.env.BASE_URL),
     routes: [
         { path: '/', name: 'language', component: () => import('../views/LanguageView.vue') },
         { path: '/quiz', name: 'quiz', component: () => import('../views/QuizView.vue') },
