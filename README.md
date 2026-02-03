@@ -25,7 +25,7 @@ npm install
  or
 pnpm install
 
-- Open your browser and navigate to http://localhost:5174:
+- Open your browser and navigate to http://localhost:5173/quiz-app-vue-vite/:
 
 npm run dev
  or
