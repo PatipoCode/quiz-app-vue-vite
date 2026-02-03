@@ -5,7 +5,7 @@ import svgLoader from 'vite-svg-loader';
 
 
 export default defineConfig({
-  base: '/patipocode/',
+  base: '/quiz-app-vue-vite/',
   plugins: [vue(),
   svgLoader()],
   resolve: {
