@@ -21,14 +21,4 @@ export default defineConfig({
       },
     },
   },
-  server: {
-    proxy: {
-      '/quiz-api': {
-        target: 'https://edu.pinkcode.school',
-        changeOrigin: true,
-        secure: true,
-        rewrite: p => p.replace(/^\/quiz-api/, '/api/v1/quizzes'),
-      },
-    },
-  },
 })
