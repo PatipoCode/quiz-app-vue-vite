@@ -76,6 +76,7 @@ const mockQuestionGender: Question = {
 describe('QuizView', () => {
     let store: ReturnType<typeof useQuizStore>
     let router: any
+    let replaceSpy: any
 
     const setupStore = (options: {
         language?: LocaleCode
@@ -93,6 +94,7 @@ describe('QuizView', () => {
         setActivePinia(createPinia())
         store = useQuizStore()
         router = useRouter()
+        replaceSpy = vi.spyOn(router, 'replace')
 
         vi.clearAllMocks()
     })
@@ -178,15 +180,16 @@ describe('QuizView', () => {
     test('onBack returns to language view from first quiz question', async () => {
         setupStore({
             current: 0,
-            questions: [mockQuestionSingleOption]
+            questions: [mockQuestionSingleOption],
+            language: 'en'
         })
 
         const wrapper = mount(QuizView)
-        const backButton = wrapper.findComponent({ name: 'BackButton' })
+        const backButtonComponent = wrapper.findComponent({ name: 'BackButton' })
 
-        await backButton.trigger('click')
+        await backButtonComponent.trigger('click')
 
-        expect(router.replace).toHaveBeenCalledWith('/')
+        expect(replaceSpy).toHaveBeenCalledWith('/')
     })
 
     test('onBack returns to previous quiz question when current > 0', async () => {
@@ -196,10 +199,10 @@ describe('QuizView', () => {
         })
 
         const wrapper = mount(QuizView)
-        const backButton = wrapper.findComponent({ name: 'BackButton' })
         const backSpy = vi.spyOn(store, 'back')
+        const button = wrapper.find('.back-button')
 
-        await backButton.trigger('click')
+        await button.trigger('click')
 
         expect(backSpy).toHaveBeenCalled()
     })
