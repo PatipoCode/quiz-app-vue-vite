@@ -39,9 +39,8 @@ function transformQuestions(apiData: any): Question[] {
 }
 
 export async function fetchQuestions(): Promise<Question[]> {
-  const apiUrl = import.meta.env.DEV
-    ? '/quiz-api/questions'
-    : 'https://edu.pinkcode.school/api/v1/quizzes/questions';
+
+  const apiUrl = 'https://quiz-api-fdez.onrender.com/api/questions';
 
   const res = await fetch(apiUrl);
 
