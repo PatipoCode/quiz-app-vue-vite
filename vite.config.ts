@@ -5,6 +5,7 @@ import svgLoader from 'vite-svg-loader';
 
 
 export default defineConfig({
+  base: '/patipocode/',
   plugins: [vue(),
   svgLoader()],
   resolve: {
