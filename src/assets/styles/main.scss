@@ -1,5 +1,18 @@
-@import url("https://fonts.googleapis.com/css2?family=Albert+Sans:wght@500;700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Albert+Sans:wght@400;700&family=Niconne&display=swap");
+@font-face {
+  font-family: "Albert Sans";
+  src: url("@/assets/fonts/AlbertSans-Regular.ttf") format("truetype");
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Niconne";
+  src: url("@/assets/fonts/Niconne-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
 
 *,
 *::before,
