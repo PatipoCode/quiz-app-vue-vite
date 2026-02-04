@@ -20,6 +20,7 @@ import BackButton from "../components/BackButton.vue";
 import GenderOption from "../components/GenderOption.vue";
 import TopicOption from "../components/TopicOption.vue";
 import DefaultOption from "../components/DefaultOption.vue";
+import BaseLoader from "../components/BaseLoader.vue";
 
 const router = useRouter();
 const quiz = useQuizStore();
@@ -99,10 +100,7 @@ const onNext = async () => {
       </ProgressBar>
     </template>
 
-    <div v-if="isLoading" class="quiz-loader">
-      <div class="quiz-loader__spinner"></div>
-      <p class="quiz-loader__text">{{ t("question.loading") }}</p>
-    </div>
+    <BaseLoader v-if="isLoading" />
 
     <template v-else-if="currentQuestion">
       <i18n-t
@@ -145,35 +143,5 @@ const onNext = async () => {
 <style scoped lang="scss">
 .title .accent {
   color: $accent;
-}
-
-.quiz-loader {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 80px 20px;
-  gap: 20px;
-}
-
-.quiz-loader__spinner {
-  width: 70px;
-  height: 70px;
-  border: 4px solid rgba($accent, 0.25);
-  border-top-color: $accent;
-  border-radius: 50%;
-  animation: spin 0.45s linear infinite;
-}
-
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.quiz-loader__text {
-  font-size: 16px;
-  font-weight: 500;
-  color: $primary;
 }
 </style>

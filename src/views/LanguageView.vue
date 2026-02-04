@@ -8,6 +8,7 @@ import { useLanguageStep } from "../composables/useLanguageStep";
 import ScreenLayout from "../components/ScreenLayout.vue";
 import ProgressBar from "../components/ProgressBar.vue";
 import QuestionOption from "../components/QuestionOption.vue";
+import BaseLoader from "../components/BaseLoader.vue";
 
 const { t } = useI18n();
 const quiz = useQuizStore();
@@ -17,6 +18,7 @@ const {
   selectedLanguage,
   loadLanguageQuestion,
   selectLanguage,
+  isLoading,
 } = useLanguageStep();
 const { progressTotal } = useQuizProgress(quiz, {
   stepsBeforeQuiz: PRE_QUIZ_STEPS,
@@ -32,7 +34,9 @@ onMounted(loadLanguageQuestion);
       <ProgressBar :current="0" :total="progressTotal" rounded> </ProgressBar>
     </template>
 
-    <template v-if="languageQuestion">
+    <BaseLoader v-if="isLoading" />
+
+    <template v-else-if="languageQuestion">
       <h1 class="title" aria-live="polite">
         {{ t(languageQuestion.titleKey) }}
       </h1>
