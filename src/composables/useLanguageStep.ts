@@ -13,11 +13,17 @@ export function useLanguageStep() {
   const { locale } = useI18n({ useScope: 'global' });
 
   const languageQuestion = ref<Question | null>(null);
+  const isLoading = ref(false);
 
   const loadLanguageQuestion = async () => {
-    const allQuestions = await fetchQuestions();
-    languageQuestion.value = findLanguageQuestion(allQuestions, LANGUAGE_QUESTION_ID);
-    quiz.loadQuestions();
+    isLoading.value = true;
+    try {
+      const allQuestions = await fetchQuestions();
+      languageQuestion.value = findLanguageQuestion(allQuestions, LANGUAGE_QUESTION_ID);
+      quiz.loadQuestions();
+    } finally {
+      isLoading.value = false;
+    }
   };
 
   const languageOptions = computed(() =>
@@ -38,5 +44,6 @@ export function useLanguageStep() {
     selectedLanguage,
     loadLanguageQuestion,
     selectLanguage,
+    isLoading,
   };
 }
