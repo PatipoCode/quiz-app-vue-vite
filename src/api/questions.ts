@@ -40,7 +40,7 @@ function transformQuestions(apiData: any): Question[] {
 
 export async function fetchQuestions(): Promise<Question[]> {
 
-  const apiUrl = 'https://quiz-api-fdez.onrender.com/api/questions';
+  const apiUrl = 'https://quiz-api-new-msk1.onrender.com/api/questions';
 
   const res = await fetch(apiUrl);
 
