@@ -17,6 +17,10 @@ A multilingual quiz application built with Vue 3, TypeScript, and Pinia for stat
 
 ![Vue.js](https://img.shields.io/badge/Vue.js-35495E?style=for-the-badge&logo=vue.js&logoColor=4FC08D) ![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white) ![Pinia](https://img.shields.io/badge/Pinia-FFD859?style=for-the-badge&logo=pinia&logoColor=black) ![Vue Router](https://img.shields.io/badge/Vue_Router-35495E?style=for-the-badge&logo=vue.js&logoColor=4FC08D) ![i18n](https://img.shields.io/badge/Vue_I18n-35495E?style=for-the-badge&logo=vue.js&logoColor=4FC08D) ![Vee-validate](https://img.shields.io/badge/Vee--validate-00C58E?style=for-the-badge&logo=&logoColor=white) ![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white) ![SCSS](https://img.shields.io/badge/SCSS-CC6699?style=for-the-badge&logo=sass&logoColor=white) ![Vitest](https://img.shields.io/badge/Vitest-6E9F18?style=for-the-badge&logo=vitest&logoColor=white) 
 
+## Backend
+
+The API for this project is available at [PatipoCode/quiz-api](https://github.com/PatipoCode/quiz-api).
+
 ## Getting Started
 
 - Start the development server:
